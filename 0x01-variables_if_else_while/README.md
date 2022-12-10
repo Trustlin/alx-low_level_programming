@@ -1,1 +1,1 @@
-alphabet game
+uppercase lowercase
