@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <line.h>
 
 /**
  * main - entry point
