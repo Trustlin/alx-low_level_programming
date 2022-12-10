@@ -1,1 +1,1 @@
-uppercase lowercase
+my alphabet
