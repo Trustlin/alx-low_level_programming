@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include <time.h>
 #include <stdio.h>
+#include <line.h>
 
 /**
  * main - entry point
@@ -10,16 +10,10 @@
 
 int main(void)
 {
-	imt n, lastNum;
+	char letter;
 
-	srand(time(0));
-	n = rand() - RAND_MAX / 2;
-	lastNum = n % 10;
-	if (lastNum > 5)
-		printf("last digit of %d is %d and is greater than 5\n", n, lastNum);
-	else if (lastNum == 0)
-		printf("last digit of %d is %d and is 0\n", n, lastNum);
-	else
-		printf("last digit of %d is %d and is less than 6 and not 0\n", n, lastNum);
+	for (letter = 'a'; letter <= 'z'; letter++)
+		putchar(letter);
+	putchar('\n');
 	return (0);
 }
