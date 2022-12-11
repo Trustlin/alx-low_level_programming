@@ -1,1 +1,1 @@
-print base ten
+use putchar for base ten
