@@ -1,1 +1,1 @@
-use putchar for base ten
+print lowercase
