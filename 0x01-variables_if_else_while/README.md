@@ -1,1 +1,1 @@
-print lowercase
+print base 16
