@@ -1,1 +1,1 @@
-print 10 variables
+print alphabet
