@@ -1,1 +1,1 @@
-print numbers
+print 10 variables
