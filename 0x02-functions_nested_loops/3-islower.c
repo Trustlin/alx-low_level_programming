@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * islower - Entry point
- *
- * Return: 1 if  letter is lowercase, 0 if not
+ * _islower - Entry point
+ * @c: the character
+ * Return: 0
  */
 
 int _islower(int c)
