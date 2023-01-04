@@ -11,7 +11,7 @@ int helperfunction(int num, int psqrt)
 {
 	if ((psqrt * psqrt) == num)
 	{
-		return (-1);
+		return (psqrt);
 
 	}
 	else
