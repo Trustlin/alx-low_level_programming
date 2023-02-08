@@ -2,48 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char *create_buffer(char *file);
-void close_file(int fd);
-
-/**
- * create_buffer - allocates 1024 bytes for a buffer
- * @file: name of file
- * Return: pointer to newly allocated buffer
- */
-
-char *create_buffer(char *file)
-{
-	char *buffer;
-
-	buffer = malloc(sizeof(char) * 1024);
-
-	if (buffer == NULL)
-	{
-		dprintf(STDERR_FILINO, "Usage: cp file_from file_to\n");
-
-		exit(97);
-	}
-
-	return (buffer);
-}
-/**
- * close_file - closes file description
- * @fd: file descriptor
- */
-
-void close_file(int fd)
-{
-	int g;
-
-	g = close(fd);
-
-	if (g == -1)
-	{
-		dprintf(STDERR_FILINO, "Error: Can't close to  %d\n", fd);
-		exit(100);
-	}
-}
-
 /**
  * main - copies the content of a file to another file
  * @argc: number of argument
@@ -51,9 +9,67 @@ void close_file(int fd)
  * Return: 0
  */
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-	int from, to, r, w;
-	char *buffer;
+	if (argc != 3)
+	{
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97);
+	}
 
-	if (argc != 1)
+	copy_file(argv[1], argv[2]);
+	exit(0);
+}
+
+/**
+ * copy_file - A function that copy file
+ * @src: source file
+ * @dest: destination
+ * Return: output code
+ */
+
+void copy_file(const char *src, const char *dest)
+{
+	int ofd, tfd, readed;
+	char buff[1024];
+
+	ofd = open(src, O_RDONLY);
+	if (!src || ofd == -1)
+	{
+	dprintf(STDERR_FILENO, "ERROR: Can't read
+				from file %s\n", src);
+		exit(98);
+	}
+
+	tfd = open(dest, O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	while ((readed = read(ofd, buff, 1024)) > 0)
+	{
+		if (write(tfd, buff, readed) != readed || tfd == -1)
+		{
+		dprintf(STDERR_FILENO, "Error: Can't write to
+					%s\n", dest);
+			exit(99);
+		}
+	}
+
+	if (readed == -1)
+	{	
+	dprintf(STDERR_FILENO, "Error: Can't read from file
+				%s\n", src);
+		exit(98);
+	}
+
+	if (close(ofd) == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n",
+				ofd);
+		exit(100);
+	}
+
+	if (close(tfd) == -1)
+	{
+	dprintf(STDERR_FILENO, "Error: Can't close fd %d\n",
+			tfd);
+	exit(100);
+	}
+}
